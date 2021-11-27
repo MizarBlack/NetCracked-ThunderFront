@@ -1,0 +1,59 @@
+
+  <mat-toolbar>
+      <span>Your playlist</span>
+      <span class="example-spacer"></span>
+      <a mat-icon-button routerLink="add">
+    <mat-icon>playlist_add</mat-icon>
+      </a>
+    </mat-toolbar>
+    <div class="col-md-8">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search by name"
+            [(ngModel)]="name"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="searchName()"
+            > Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+          <ul class="list-group">
+            <tr
+
+              *ngFor="let album of albums; let i = index"
+              [class.active]="i == currentIndex"
+              (click)="setActiveAlbum(album, i)"
+            >
+            <mat-card class="playlist-card" >
+              <mat-card-title-group>
+                <mat-card-title>{{album.name}}</mat-card-title>
+                <mat-card-subtitle>{{album.release_date}}</mat-card-subtitle>
+              </mat-card-title-group>
+              <mat-card-content>
+                <p>{{album.description}}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <div class="example-button-row">
+                  <button mat-raised-button>Open</button>
+                  <span class="example-spacer"></span>
+                  <button mat-icon-button
+                  (click)="deleteAlbum()"
+                  ><mat-icon>delete</mat-icon></button>
+                    <button mat-icon-button routerLink="{{ currentAlbum.id }}"><mat-icon>edit_note</mat-icon></button>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+            </tr>
+          </ul>
+          <div class="col-md-6">
+          </div>
+        </div>
